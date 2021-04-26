@@ -84,30 +84,5 @@ namespace SerializationSamlpeTest
         }
 
         #endregion
-
-        #region DataSample
-
-        [Test]
-        public void DataSampleToBytes_ConvertToBytes_ArrayIsNotEmpty()
-        {
-            DataSample expected = data;
-            byte[] actual = expected.ToBytes();
-
-            Assert.IsNotEmpty(actual);
-        }
-
-        [Test]
-        public void BytesToDataSample_ConvertToDataSample_AreEqual()
-        {
-            DataSample expected = data;
-            DataSample actual = expected.ToBytes().GetData();
-
-            Assert.IsNotNull(actual);
-            Assert.AreEqual(expected.intValue, actual.intValue);
-            Assert.AreEqual(expected.floatValue, actual.floatValue);
-            Assert.AreEqual(expected.stringValue, actual.stringValue);
-        }
-
-        #endregion
     }
 }

@@ -25,22 +25,24 @@ namespace SerializationSample
             };
 
             Stopwatch stopwatch = Stopwatch.StartNew();
+
             stopwatch.Start();
-            File.WriteAllBytes(pathBytes, data.ToBytes());
+            uint hash = ByteSerialization.Serialize(pathBytes, data);
             stopwatch.Stop();
             timeSerializationBytes = stopwatch.ElapsedMilliseconds.ToString();
 
             stopwatch.Reset();
             stopwatch.Start();
-            data = File.ReadAllBytes(pathBytes).GetData();
+            data = ByteSerialization.Deserialize<DataSample>(pathBytes, hash);
             stopwatch.Stop();
             timeDeserializationBytes = stopwatch.ElapsedMilliseconds.ToString();
-
 
             Console.WriteLine($"Bytes serialization time: {timeSerializationBytes}");
             Console.WriteLine($"Bytes deserialization time: {timeDeserializationBytes}");
             Console.WriteLine($"**********");
 
+
+            
             stopwatch.Reset();
             stopwatch.Start();
             File.WriteAllText(pathJson, JsonConvert.SerializeObject(data));
@@ -56,13 +58,12 @@ namespace SerializationSample
 
             Console.WriteLine($"JSON serialization time: {timeSerializationJson}");
             Console.WriteLine($"JSON deserialization time: {timeDeserializationJson}");
-            
-            // Bytes serialization time: 5
-            // Bytes deserialization time: 2
-            //     **********
-            // JSON serialization time: 613
-            // JSON deserialization time: 111
 
+            // Bytes serialization time: 35
+            // Bytes deserialization time: 13
+            //     **********
+            // JSON serialization time: 481
+            // JSON deserialization time: 82
 
 
             Console.ReadKey();
