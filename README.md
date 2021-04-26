@@ -1,12 +1,16 @@
 # SerializationSample
-Simple serialization to bytes.
+Serialization to bytes.
 
-This serialization to bytes takes `5 ms`, file size `15 byte`.
+This serialization to bytes `ByteSerialization.Serialize(pathBytes, data)` takes `35 ms`, file size `15 byte`.
 
-The deserialization from bytes takes `2 ms`.
+The deserialization from bytes `ByteSerialization.Deserialize<DataSample>(pathBytes, hash)` takes `13 ms`.
 
 ___
 
-For example, the serialization to json takes `613 ms`, file size `55 byte`.
+For example, the serialization to json takes `481 ms`, file size `55 byte`.
 
-The deserialization from json takes `111 ms`.
+The deserialization from json takes `82 ms`.
+
+___
+
+Also added validation for catch broken objects before deserialization.
